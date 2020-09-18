@@ -1,0 +1,11 @@
+node_modules/
+
+/app/build/
+
+/app/public/images/logo.*
+
+
+/server/public/
+
+
+.vscode
