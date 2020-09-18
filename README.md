@@ -81,6 +81,7 @@ $ npm start
 
 * You will receive a certificate warning saying certificate is not secure. Use following document to install certificate locally in Chrome and make Chrime to trust this certificate https://www.andrewconnell.com/blog/updated-creating-and-trusting-self-signed-certs-on-macos-and-chrome/#add-certificate-to-trusted-root-authority. This will add certificate as a trusted entity.
 
+* Go to Chrome again and type in localhost. You will see valid certificate and able to load edumeet
 
 
 
