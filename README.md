@@ -18,7 +18,7 @@ brew install redis
 * Clone the project:
 
 ```bash
-$ git clone https://github.com/havfo/multiparty-meeting.git
+$ git clone https://github.com/alhadbhadekar/edumeet-starter-pack.git
 $ cd edumeet-starter-pack
 ```
 
