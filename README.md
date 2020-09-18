@@ -1,93 +1,26 @@
 # eduMeet
 
-A WebRTC meeting service using [mediasoup](https://mediasoup.org).
+Starter-pack for eduMeet. Source ( https://github.com/edumeet/edumeet )
 
-![demo](demo.gif)
-
-Try it online at https://letsmeet.no. You can add /roomname to the URL for specifying a room.
-
-## Features
-
-* Audio/Video
-* Chat
-* Screen sharing
-* File sharing
-* Different layouts
-* Internationalization support
-
-## Docker
-
-If you want the automatic approach, you can find a docker image [here](https://hub.docker.com/r/misi/mm/).
-
-## Ansible
-
-If you want the ansible approach, you can find ansible role [here](https://github.com/misi/mm-ansible/).
-[![asciicast](https://asciinema.org/a/311365.svg)](https://asciinema.org/a/311365)
-
-## Package Installation
-
-If you want to install it on the Debian & Ubuntu based operating systems.
-
-* Prerequisites:
-multiparty-meeting will run on nodejs v10.x and later versions. (v12.x has a know issue for now, please until it will be fixed use the 10.x version)
-To install see here [here](https://github.com/nodesource/distributions/blob/master/README.md#debinstall).
-
-* Download .deb package from [here](https://github.com/havfo/multiparty-meeting/actions?query=workflow%3ADeployer+branch%3Amaster+is%3Asuccess) (job artifact)
-
-* Unzip the file
-
-```bash
-$ unzip multiparty-meeting.zip
-```
-
-* Install the package
-
-```bash
-$ sudo apt install multiparty-meeting/multiparty-meeting.deb
-```
-
-* After package installation, don't forget the configure ip address in config file.
-
-```bash
-$ sudo nano /etc/meeting/server-config.js
-```
-
-* Finally, start the service by (it's enabled by default)
-
-```bash
-$ sudo systemctl start multiparty-meeting
-```
-
-## Manual installation
+## Manual installation on MacBook
 
 * Prerequisites:
 Currently multiparty-meeting will only run on nodejs v13.x
 To install see here [here](https://github.com/nodesource/distributions/blob/master/README.md#debinstall).
 
+Install redis server
+
 ```bash
-$ sudo apt install git npm build-essential redis
+brew update
+brew install redis
 ```
 
 * Clone the project:
 
 ```bash
 $ git clone https://github.com/havfo/multiparty-meeting.git
-$ cd multiparty-meeting
+$ cd edumeet-starter-pack
 ```
-
-* Copy `server/config/config.example.js` to `server/config/config.js` :
-
-```bash
-$ cp server/config/config.example.js server/config/config.js
-```
-
-* Copy `app/public/config/config.example.js` to `app/public/config/config.js` :
-
-```bash
-$ cp app/public/config/config.example.js app/public/config/config.js
-```
-
-* Edit your two `config.js` with appropriate settings (listening IP/port, logging options, **valid** TLS certificate, don't forget ip setting in last section in server config: (webRtcTransport), etc).
 
 * Set up the browser app:
 
