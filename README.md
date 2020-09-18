@@ -40,7 +40,35 @@ $ cd server
 $ npm install
 ```
 
+* Modify IP address to your laptop IP address on line 366 of server/config.js file. For me I have put it as 192.168.2.22. Everytime we connect to new network we will have to change IP address in server/config.js file
+
+```
+		webRtcTransport :
+		{
+			listenIps :
+			[
+				// change 192.0.2.1 IPv4 to your server's IPv4 address!!
+				{ ip: '192.168.2.22', announcedIp: null }
+
+				// Can have multiple listening interfaces
+				// change 2001:DB8::1 IPv6 to your server's IPv6 address!!
+				// { ip: '2001:DB8::1', announcedIp: null }
+			],
+			initialAvailableOutgoingBitrate : 1000000,
+			minimumAvailableOutgoingBitrate : 600000,
+			// Additional options that are not part of WebRtcTransportOptions.
+			maxIncomingBitrate              : 1500000
+		}
+	}
+ ```
+ 
 ## Run it locally
+
+* Start redis server in one terminal
+
+```bash
+redis-server
+```
 
 * Run the Node.js server application in a terminal:
 
@@ -49,70 +77,12 @@ $ cd server
 $ npm start
 ```
 
-* Note: Do not run the server as root. If you need to use port 80/443 make a iptables-mapping for that or use systemd configuration for that (see further down this doc).
-* Test your service in a webRTC enabled browser: `https://yourDomainOrIPAdress:3443/roomname`
+* Go to Chrome and type localhost in address
 
-## Deploy it in a server
+* You will receive a certificate warning saying certificate is not secure. Use following document to install certificate locally in Chrome and make Chrime to trust this certificate https://www.andrewconnell.com/blog/updated-creating-and-trusting-self-signed-certs-on-macos-and-chrome/#add-certificate-to-trusted-root-authority. This will add certificate as a trusted entity.
 
-* Stop your locally running server. Copy systemd-service file `multiparty-meeting.service` to `/etc/systemd/system/` and check location path settings:
 
-```bash
-$ cp multiparty-meeting.service /etc/systemd/system/
-$ edit /etc/systemd/system/multiparty-meeting.service
-```
 
-* Reload systemd configuration and start service:
 
-```bash
-$ systemctl daemon-reload
-$ systemctl start multiparty-meeting
-```
 
-* If you want to start multiparty-meeting at boot time:
 
-```bash
-$ systemctl enable multiparty-meeting
-```
-
-## Ports and firewall
-
-* 3443/tcp (default https webserver and signaling - adjustable in `server/config.js`)
-* 4443/tcp (default `npm start` port for developing with live browser reload, not needed in production environments - adjustable in app/package.json)
-* 40000-49999/udp/tcp (media ports - adjustable in `server/config.js`)
-
-## Load balanced installation
-
-To deploy this as a load balanced cluster, have a look at [HAproxy](HAproxy.md).
-
-## Learning management integration
-
-To integrate with an LMS (e.g. Moodle), have a look at [LTI](LTI/LTI.md).
-
-## TURN configuration
-
-* You need an additional [TURN](https://github.com/coturn/coturn)-server for clients located behind restrictive firewalls! Add your server and credentials to `server/config/config.js`
-
-## Community-driven support
-
-* Open mailing list: community@lists.edumeet.org
-* Subscribe: lists.edumeet.org/sympa/subscribe/community/
-* Open archive: lists.edumeet.org/sympa/arc/community/
-
-## Authors
-
-* Håvar Aambø Fosstveit
-* Stefan Otto
-* Mészáros Mihály
-
-This started as a fork of the [work](https://github.com/versatica/mediasoup-demo) done by:
-
-* Iñaki Baz Castillo [[website](https://inakibaz.me)|[github](https://github.com/ibc/)]
-
-## License
-
-MIT License (see `LICENSE.md`)
-
-Contributions to this work were made on behalf of the GÉANT project, a project that has received funding from the European Union’s Horizon 2020 research and innovation programme under Grant Agreement No. 731122 (GN4-2). On behalf of GÉANT project, GÉANT Association is the sole owner of the copyright in all material which was developed by a member of the GÉANT project.
-
-GÉANT Vereniging (Association) is registered with the Chamber of Commerce in Amsterdam with registration number 40535155 and operates in the UK as a branch of GÉANT Vereniging. Registered office: Hoekenrode 3, 1102BR Amsterdam, The Netherlands. UK branch address: City House, 126-130 Hills Road, Cambridge CB2 1PQ, UK.
-# edumeet-starter-pack
